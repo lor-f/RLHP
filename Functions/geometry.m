@@ -1,0 +1,19 @@
+function [dz, A_f, A_vp, A_w, p_i, p_o, N, RPos] = geometry(L, D_i, D_o, film, section_E)
+N = L*1000;
+NTurn = length(section_E)*0.5;
+W = 40;
+aRad = N/(NTurn*2);
+RMax = aRad - W;
+R1 = 1:RMax;
+RTop1 = RMax + zeros(1,W/2);
+RTop2 = RMax + zeros(1,W/2);
+R2 = flip(R1);
+RBot = ones(1,W);
+RPos = [R1 RTop1 -RTop2 -R2 -RBot];
+dz = L/N; 
+A_f = 0.25*pi*D_i^2;
+A_vp = 0.25*pi*((D_o)^2-(D_o-(2*film))^2);
+A_w = (0.5*pi*D_o^2)-A_f;
+p_i = pi*D_i;
+p_o = pi*D_o;
+end
